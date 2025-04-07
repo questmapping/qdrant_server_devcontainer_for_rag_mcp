@@ -25,7 +25,7 @@ qdrant_server_devcontainer/ ├── .devcontainer/ │ ├── devcontainer.
 2. The container will automatically:
    - Start Qdrant
    - Run the ingestion script to index your files (better to do this manually from within the container)
-3. After the container is built You should be able to access Qdrant at `http://localhost:6334` (or 6333 from within the container)
+3. After the container is built You should be able to access Qdrant at `http://localhost:6333`
 
 ## Features
 

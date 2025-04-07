@@ -43,7 +43,8 @@ def test_qdrant_connection():
         for i, hit in enumerate(hits, 1):
             logger.info(f"\nResult {i}:")
             logger.info(f"Score: {hit.score:.4f}")
-            logger.info(f"Content: {hit.payload['text'][:200]}...")
+            logger.info(f"File: {hit.payload['file_name']}")
+            logger.info(f"Type: {hit.payload['file_type']}")
         
     except Exception as e:
         logger.error(f"Test failed: {e}")

@@ -29,7 +29,7 @@ EXPOSE 6333 6334
 # # Run Supervisor as PID 1
 # CMD ["/usr/bin/supervisord", "-n"]
 
-# Use a shell command to change to /qdrant and run the entrypoint script
+# Use CMD to run the entrypoint script so it isn’t overridden by devcontainer settings
 ENTRYPOINT ["/bin/sh", "-c", "./entrypoint.sh"]
 
 # By default, this will start Qdrant with the entrypoint. You can still enter the shell interactively.

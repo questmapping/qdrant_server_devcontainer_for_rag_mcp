@@ -10,6 +10,7 @@
   "forwardPorts": [6333, 6334],   // optional for UI visibility
   // "appPort": [6333],         // optional for Remote Explorer integration
   // "postStartCommand": "python /workspace/ingest.py",
+  "overrideCommand": false,
   "mounts": [
     "source=${localWorkspaceFolder}/data,target=/qdrant/data,type=bind"
   ],
