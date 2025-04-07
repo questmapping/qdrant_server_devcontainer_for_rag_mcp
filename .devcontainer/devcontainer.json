@@ -4,9 +4,10 @@
     "dockerfile": "Dockerfile"
   },
   "runArgs": [
-    "-p", "6334:6333"
+    "-p", "6333:6333",
+    "-p", "6334:6334"
   ],
-  "forwardPorts": [6334],   // optional for UI visibility
+  "forwardPorts": [6333, 6334],   // optional for UI visibility
   // "appPort": [6333],         // optional for Remote Explorer integration
   // "postStartCommand": "python /workspace/ingest.py",
   "mounts": [

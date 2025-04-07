@@ -17,15 +17,19 @@ RUN echo "source /app/venv/bin/activate" >> /root/.bashrc
 # # Copy supervisor config
 # COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-# Ensure entrypoint.sh can be executed (qdrant has its own entrypoint)
-RUN chmod +x /qdrant/entrypoint.sh
+# Switch to the qdrant directory where entrypoint.sh and the qdrant binary reside
+WORKDIR /qdrant
 
-EXPOSE 6333
+# Ensure entrypoint.sh is executable
+RUN chmod +x entrypoint.sh
+
+# Expose Qdrant ports (HTTP and gRPC)
+EXPOSE 6333 6334
 
 # # Run Supervisor as PID 1
 # CMD ["/usr/bin/supervisord", "-n"]
 
-# Set entrypoint to run entrypoint.sh (starting Qdrant)
-ENTRYPOINT ["/qdrant/entrypoint.sh"]
+# Use a shell command to change to /qdrant and run the entrypoint script
+ENTRYPOINT ["/bin/sh", "-c", "./entrypoint.sh"]
 
 # By default, this will start Qdrant with the entrypoint. You can still enter the shell interactively.
