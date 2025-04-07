@@ -1,0 +1,12 @@
+# Data directory (contains files that will be indexed by Qdrant)
+data/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# VS Code
+.vscode/
+.vscode-test/
+.vscode-remote/
