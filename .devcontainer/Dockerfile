@@ -14,10 +14,18 @@ RUN /app/venv/bin/pip install --upgrade pip && /app/venv/bin/pip install -r requ
 # Add venv activation to .bashrc
 RUN echo "source /app/venv/bin/activate" >> /root/.bashrc
 
-# Copy supervisor config
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+# # Copy supervisor config
+# COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
+# Ensure entrypoint.sh can be executed (qdrant has its own entrypoint)
+RUN chmod +x /qdrant/entrypoint.sh
 
 EXPOSE 6333
 
-# Run Supervisor as PID 1
-CMD ["/usr/bin/supervisord", "-n"]
+# # Run Supervisor as PID 1
+# CMD ["/usr/bin/supervisord", "-n"]
+
+# Set entrypoint to run entrypoint.sh (starting Qdrant)
+ENTRYPOINT ["/qdrant/entrypoint.sh"]
+
+# By default, this will start Qdrant with the entrypoint. You can still enter the shell interactively.
