@@ -1,5 +1,0 @@
-qdrant-client
-sentence-transformers
-pdfminer.six
-python-markdown
-python-dotenv

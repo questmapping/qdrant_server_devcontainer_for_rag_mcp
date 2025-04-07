@@ -1,6 +1,7 @@
 from qdrant_client import QdrantClient
 from qdrant_client.http.models import Distance, VectorParams, PointStruct
 from sentence_transformers import SentenceTransformer
+from transformers import AutoModel
 import os
 from pathlib import Path
 import logging

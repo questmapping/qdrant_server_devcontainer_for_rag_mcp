@@ -1,0 +1,6 @@
+qdrant-client
+sentence-transformers==2.2.2
+transformers==4.34.0
+pdfminer.six
+markdown
+python-dotenv

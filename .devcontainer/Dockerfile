@@ -1,8 +1,18 @@
 FROM qdrant/qdrant:latest
 
-# Install Python and pip dependencies
-RUN apt update && apt install -y python3 python3-pip curl && \
-    pip install qdrant-client sentence-transformers pdfminer.six python-markdown python-dotenv
+# Install system dependencies
+RUN apt update && apt install -y python3 python3-pip python3-venv curl procps
+
+# Create app directory and virtual environment
+RUN mkdir -p /app && python3 -m venv /app/venv
+
+# Copy requirements.txt and install packages in virtual environment
+COPY requirements.txt /app/requirements.txt
+WORKDIR /app
+RUN /app/venv/bin/pip install --upgrade pip && /app/venv/bin/pip install -r requirements.txt
+
+# Activate virtual environment
+RUN echo "source /app/venv/bin/activate" >> /root/.bashrc
 
 # Expose Qdrant port
 EXPOSE 6333
