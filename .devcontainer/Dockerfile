@@ -1,21 +1,23 @@
 FROM qdrant/qdrant:latest
 
-# Install system dependencies
-RUN apt update && apt install -y python3 python3-pip python3-venv curl procps
+# Install system dependencies + supervisor
+RUN apt update && apt install -y python3 python3-pip python3-venv curl procps supervisor
 
-# Create app directory and virtual environment
-RUN mkdir -p /app && python3 -m venv /app/venv
+# Set up app and virtualenv
+RUN mkdir -p /app /var/log/supervisor && python3 -m venv /app/venv
 
-# Copy requirements.txt and install packages in virtual environment
+# Install Python packages
 COPY requirements.txt /app/requirements.txt
 WORKDIR /app
 RUN /app/venv/bin/pip install --upgrade pip && /app/venv/bin/pip install -r requirements.txt
 
-# Activate virtual environment
+# Add venv activation to .bashrc
 RUN echo "source /app/venv/bin/activate" >> /root/.bashrc
 
-# Expose Qdrant port
+# Copy supervisor config
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+
 EXPOSE 6333
 
-# Run Qdrant in background and leave terminal interactive
-CMD ["sh", "-c", "qdrant & bash"]
+# Run Supervisor as PID 1
+CMD ["/usr/bin/supervisord", "-n"]

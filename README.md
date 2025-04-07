@@ -25,17 +25,7 @@ qdrant_server_devcontainer/ ├── .devcontainer/ │ ├── devcontainer.
 2. The container will automatically:
    - Start Qdrant
    - Run the ingestion script to index your files
-3. After the container is built, check the VS Code output panel for the forwarded port number (typically in the "Dev Containers" output channel)
-4. The port number will be displayed in the output panel, for example:
-   ```
-   [Info] Forwarding port XXXXX for container XXXXXX
-   [Info] Found forwarder port: YYYY
-   ```
-5. You can verify the port is accessible using your system's network tools. For example, on Windows PowerShell:
-   ```powershell
-   Test-NetConnection -ComputerName localhost -Port YYYY
-   ```
-6. You can now access Qdrant at `http://localhost:YYYY`
+3. After the container is built You should be able to access Qdrant at `http://localhost:6334` (or 6333 from within the container)
 
 ## Features
 
