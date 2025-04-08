@@ -32,17 +32,17 @@ def test_qdrant_connection():
         model = SentenceTransformer("all-MiniLM-L6-v2")
         query_vector = model.encode(test_query).tolist()
         
-        # Perform search
-        hits = client.search(
+        # Perform search using query_points
+        response = client.query_points(
             collection_name="local-docs",
-            query_vector=query_vector,
+            query=query_vector,
             limit=5
         )
         
         logger.info("\nSearch results:")
-        for i, hit in enumerate(hits, 1):
+        for i, hit in enumerate(response.points, 1):
             logger.info(f"\nResult {i}:")
-            logger.info(f"Score: {hit.score:.4f}")
+            logger.info(f"Score: {hit.score}")
             logger.info(f"File: {hit.payload['file_name']}")
             logger.info(f"Type: {hit.payload['file_type']}")
         

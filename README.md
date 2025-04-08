@@ -22,10 +22,12 @@ qdrant_server_devcontainer/ ├── .devcontainer/ │ ├── devcontainer.
 ## Usage
 
 1. Place your text files in the `data/` directory
-2. The container will automatically:
-   - Start Qdrant
-   - Run the ingestion script to index your files (better to do this manually from within the container)
+2. The container will automatically start Qdrant
 3. After the container is built You should be able to access Qdrant at `http://localhost:6333`
+4. Run the ingestion script manually from within the container:
+   ```bash
+   python ingest.py
+   ```
 
 ## Features
 
@@ -56,3 +58,10 @@ qdrant_server_devcontainer/ ├── .devcontainer/ │ ├── devcontainer.
 ## License
 
 MIT License
+
+## TODO
+- handle giant PDFs efficiently,
+- extract text per page using parallel processing,
+- embed and push each chunk as it’s ready,
+- support GPU embedding if torch.cuda.is_available()?
+- add support for epub files
